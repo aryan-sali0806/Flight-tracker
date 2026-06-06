@@ -1,10 +1,17 @@
-# Application entry point.
-# Creates the FastAPI instance, registers middleware, and mounts routers.
+import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import flights
+
 from config import APP_TITLE, APP_DESCRIPTION, APP_VERSION
+from routers import flights
+
+# Configure once here — all loggers in every module inherit this automatically
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)-8s %(name)s — %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 app = FastAPI(
     title=APP_TITLE,
@@ -21,7 +28,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount the flights router — all its routes will be prefixed with /flights
 app.include_router(flights.router, prefix="/flights", tags=["Flights"])
 
 

@@ -1,41 +1,52 @@
-# Handles all communication with the OpenSky Network API.
-# The router calls fetch_flights() and gets back clean Flight objects.
-# Raw API details are fully contained here.
+import logging
+from typing import Any
 
 import httpx
-from typing import Optional
+
+from config import OPENSKY_STATES_ENDPOINT, OPENSKY_TIMEOUT_SECONDS
+from models.bbox import BoundingBox, INDIA_BOUNDING_BOX
 from models.flight import Flight
-from config import OPENSKY_STATES_ENDPOINT, OPENSKY_TIMEOUT_SECONDS, BoundingBox, INDIA_BOUNDING_BOX
+
+logger = logging.getLogger(__name__)
 
 
-# OpenSky returns each aircraft as a plain list (not a dict).
+class OpenSkyError(Exception):
+    """
+    Raised when the OpenSky API is unreachable or returns an error.
+    Carries an HTTP status code so the router can forward it to the client.
+    """
+    def __init__(self, detail: str, status_code: int = 503) -> None:
+        self.detail = detail
+        self.status_code = status_code
+        super().__init__(detail)
+
+
+# OpenSky returns each aircraft as a plain list, not a dict.
 # These are the index positions of the fields we care about.
-# Full field reference: https://openskynetwork.github.io/opensky-api/rest.html
+# Full reference: https://openskynetwork.github.io/opensky-api/rest.html
 _ICAO24_IDX    = 0
 _CALLSIGN_IDX  = 1
-_LATITUDE_IDX  = 6
 _LONGITUDE_IDX = 5
-_ALTITUDE_IDX  = 7   # baro_altitude (metres)
-_VELOCITY_IDX  = 9   # velocity (m/s)
-_HEADING_IDX   = 10  # true_track (degrees)
+_LATITUDE_IDX  = 6
+_ALTITUDE_IDX  = 7   # baro_altitude in metres
+_VELOCITY_IDX  = 9   # ground speed in m/s
+_HEADING_IDX   = 10  # true track in degrees
 
 
-def _parse_state_vector(state: list) -> Optional[Flight]:
+def _parse_state_vector(state: list[Any]) -> Flight | None:
     """
-    Convert a raw OpenSky state vector (a list) into a Flight model.
-    Returns None if the entry is malformed or missing the ICAO24 identifier.
+    Convert a raw OpenSky state vector into a Flight model.
+    Returns None if the entry is missing the ICAO24 identifier.
     """
     if not state or not state[_ICAO24_IDX]:
-        # Skip entries that have no aircraft identifier — unusable data
         return None
 
-    # Callsign comes with trailing spaces from OpenSky — strip them
     raw_callsign = state[_CALLSIGN_IDX]
     callsign = raw_callsign.strip() if raw_callsign else None
 
     return Flight(
         icao24=state[_ICAO24_IDX],
-        callsign=callsign or None,   # convert empty string to None
+        callsign=callsign or None,
         latitude=state[_LATITUDE_IDX],
         longitude=state[_LONGITUDE_IDX],
         altitude=state[_ALTITUDE_IDX],
@@ -50,31 +61,47 @@ async def fetch_flights(bbox: BoundingBox = INDIA_BOUNDING_BOX) -> list[Flight]:
     Defaults to Indian airspace if no region is specified.
 
     Raises:
-        httpx.TimeoutException: if OpenSky does not respond in time
-        httpx.HTTPStatusError: if OpenSky returns a non-2xx status
-        httpx.RequestError: for any other network-level failure
+        OpenSkyError: for any failure communicating with the OpenSky API.
     """
-    # async with creates a fresh HTTP client for this request and closes it cleanly afterwards
-    async with httpx.AsyncClient(timeout=OPENSKY_TIMEOUT_SECONDS) as client:
-        response = await client.get(
-            OPENSKY_STATES_ENDPOINT,
-            params=bbox.to_params(),
+    logger.info("Fetching flights for bbox: %s", bbox)
+
+    try:
+        async with httpx.AsyncClient(timeout=OPENSKY_TIMEOUT_SECONDS) as client:
+            response = await client.get(
+                OPENSKY_STATES_ENDPOINT,
+                params=bbox.to_params(),
+            )
+            response.raise_for_status()
+
+    except httpx.TimeoutException:
+        logger.error("OpenSky request timed out after %ds", OPENSKY_TIMEOUT_SECONDS)
+        raise OpenSkyError(
+            detail="OpenSky API timed out. Please try again shortly.",
+            status_code=503,
         )
 
-        # Raise an exception immediately if OpenSky returned 4xx or 5xx
-        response.raise_for_status()
+    except httpx.HTTPStatusError as exc:
+        logger.error("OpenSky returned HTTP %d", exc.response.status_code)
+        raise OpenSkyError(
+            detail=f"OpenSky API returned an error: {exc.response.status_code}",
+            status_code=502,
+        )
 
-        data = response.json()
+    except httpx.RequestError as exc:
+        logger.error("Network error reaching OpenSky: %s", exc)
+        raise OpenSkyError(
+            detail="Could not reach OpenSky API. Check your internet connection.",
+            status_code=503,
+        )
 
-        # OpenSky returns {"time": ..., "states": [[...], [...]]}
-        # "states" is None when no aircraft are visible (rare but possible)
-        raw_states = data.get("states") or []
+    data = response.json()
+    raw_states: list[Any] = data.get("states") or []
 
-        # Parse each state vector, dropping any that fail validation
-        flights = [
-            parsed
-            for state in raw_states
-            if (parsed := _parse_state_vector(state)) is not None
-        ]
+    flights = [
+        parsed
+        for state in raw_states
+        if (parsed := _parse_state_vector(state)) is not None
+    ]
 
-        return flights
+    logger.info("Returned %d aircraft", len(flights))
+    return flights
