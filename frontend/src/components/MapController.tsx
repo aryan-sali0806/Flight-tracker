@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useMap } from 'react-leaflet'
 
+export interface FlyTarget {
+  coords: [number, number]
+  zoom: number
+}
+
 interface Props {
-  flyTarget: [number, number] | null
+  flyTarget: FlyTarget | null
 }
 
 export default function MapController({ flyTarget }: Props) {
@@ -10,7 +15,7 @@ export default function MapController({ flyTarget }: Props) {
 
   useEffect(() => {
     if (flyTarget) {
-      map.flyTo(flyTarget, 12, { duration: 1.5 })
+      map.flyTo(flyTarget.coords, flyTarget.zoom, { duration: 1.5 })
     }
   }, [flyTarget, map])
 

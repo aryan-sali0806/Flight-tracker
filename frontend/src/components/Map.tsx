@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import type { MapType, Flight } from '../types'
-import MapController from './MapController'
+import MapController, { type FlyTarget } from './MapController'
 import FlightMarker from './FlightMarker'
 
 const TILE_LAYERS: Record<MapType, {
@@ -42,7 +42,7 @@ function hasCoordinates(
 
 interface Props {
   mapType: MapType
-  flyTarget: [number, number] | null
+  flyTarget: FlyTarget | null
   flights: Flight[]
 }
 
@@ -52,8 +52,8 @@ export default function Map({ mapType, flyTarget, flights }: Props) {
 
   return (
     <MapContainer
-      center={[20, 0]}
-      zoom={2}
+      center={[22.5, 82.5]}
+      zoom={5}
       minZoom={2}
       style={{ width: '100%', height: '100%' }}
     >
