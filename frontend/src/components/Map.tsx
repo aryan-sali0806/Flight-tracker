@@ -1,7 +1,8 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import type { MapType } from '../types'
+import type { MapType, Flight } from '../types'
 import MapController from './MapController'
+import FlightMarker from './FlightMarker'
 
 const TILE_LAYERS: Record<MapType, {
   url: string
@@ -30,13 +31,24 @@ const TILE_LAYERS: Record<MapType, {
   },
 }
 
+// Type predicate: narrows Flight to only those with confirmed coordinates.
+// Using this in .filter() gives TypeScript a non-null latitude and longitude
+// in the resulting array — no need for ! assertions inside .map().
+function hasCoordinates(
+  f: Flight
+): f is Flight & { latitude: number; longitude: number } {
+  return f.latitude !== null && f.longitude !== null
+}
+
 interface Props {
   mapType: MapType
   flyTarget: [number, number] | null
+  flights: Flight[]
 }
 
-export default function Map({ mapType, flyTarget }: Props) {
+export default function Map({ mapType, flyTarget, flights }: Props) {
   const layer = TILE_LAYERS[mapType]
+  const placedFlights = flights.filter(hasCoordinates)
 
   return (
     <MapContainer
@@ -52,6 +64,9 @@ export default function Map({ mapType, flyTarget }: Props) {
         subdomains={layer.subdomains}
       />
       <MapController flyTarget={flyTarget} />
+      {placedFlights.map(flight => (
+        <FlightMarker key={flight.icao24} flight={flight} />
+      ))}
     </MapContainer>
   )
 }
