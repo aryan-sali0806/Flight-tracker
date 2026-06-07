@@ -1,0 +1,57 @@
+import type { Airport } from '../types'
+
+export const AIRPORTS: Airport[] = [
+  // India
+  { icao: 'VIDP', iata: 'DEL', name: 'Indira Gandhi International Airport',              city: 'New Delhi',   country: 'India',        lat: 28.5562,  lng:  77.1000 },
+  { icao: 'VABB', iata: 'BOM', name: 'Chhatrapati Shivaji Maharaj International Airport', city: 'Mumbai',      country: 'India',        lat: 19.0896,  lng:  72.8656 },
+  { icao: 'VOMM', iata: 'MAA', name: 'Chennai International Airport',                     city: 'Chennai',     country: 'India',        lat: 12.9900,  lng:  80.1693 },
+  { icao: 'VOBL', iata: 'BLR', name: 'Kempegowda International Airport',                  city: 'Bangalore',   country: 'India',        lat: 13.1979,  lng:  77.7063 },
+  { icao: 'VECC', iata: 'CCU', name: 'Netaji Subhas Chandra Bose International Airport',  city: 'Kolkata',     country: 'India',        lat: 22.6547,  lng:  88.4467 },
+  { icao: 'VOHY', iata: 'HYD', name: 'Rajiv Gandhi International Airport',                city: 'Hyderabad',   country: 'India',        lat: 17.2313,  lng:  78.4298 },
+  { icao: 'VOCL', iata: 'COK', name: 'Cochin International Airport',                      city: 'Kochi',       country: 'India',        lat: 10.1520,  lng:  76.4019 },
+  { icao: 'VOGO', iata: 'GOI', name: 'Goa International Airport',                         city: 'Goa',         country: 'India',        lat: 15.3808,  lng:  73.8314 },
+  { icao: 'VAAH', iata: 'AMD', name: 'Sardar Vallabhbhai Patel International Airport',    city: 'Ahmedabad',   country: 'India',        lat: 23.0772,  lng:  72.6347 },
+  { icao: 'VIAR', iata: 'ATQ', name: 'Sri Guru Ram Dass Jee International Airport',       city: 'Amritsar',    country: 'India',        lat: 31.7096,  lng:  74.7973 },
+  // Middle East
+  { icao: 'OMDB', iata: 'DXB', name: 'Dubai International Airport',                       city: 'Dubai',       country: 'UAE',          lat: 25.2528,  lng:  55.3644 },
+  { icao: 'OMAA', iata: 'AUH', name: 'Abu Dhabi International Airport',                   city: 'Abu Dhabi',   country: 'UAE',          lat: 24.4330,  lng:  54.6511 },
+  { icao: 'OTHH', iata: 'DOH', name: 'Hamad International Airport',                       city: 'Doha',        country: 'Qatar',        lat: 25.2731,  lng:  51.6081 },
+  { icao: 'OERK', iata: 'RUH', name: 'King Khalid International Airport',                 city: 'Riyadh',      country: 'Saudi Arabia', lat: 24.9576,  lng:  46.6988 },
+  // Europe
+  { icao: 'EGLL', iata: 'LHR', name: 'London Heathrow Airport',                           city: 'London',      country: 'UK',           lat: 51.4775,  lng:  -0.4614 },
+  { icao: 'EGKK', iata: 'LGW', name: 'London Gatwick Airport',                            city: 'London',      country: 'UK',           lat: 51.1481,  lng:  -0.1903 },
+  { icao: 'LFPG', iata: 'CDG', name: 'Charles de Gaulle Airport',                         city: 'Paris',       country: 'France',       lat: 49.0097,  lng:   2.5478 },
+  { icao: 'EDDF', iata: 'FRA', name: 'Frankfurt Airport',                                 city: 'Frankfurt',   country: 'Germany',      lat: 50.0379,  lng:   8.5622 },
+  { icao: 'EDDM', iata: 'MUC', name: 'Munich Airport',                                    city: 'Munich',      country: 'Germany',      lat: 48.3538,  lng:  11.7861 },
+  { icao: 'EHAM', iata: 'AMS', name: 'Amsterdam Airport Schiphol',                        city: 'Amsterdam',   country: 'Netherlands',  lat: 52.3105,  lng:   4.7683 },
+  { icao: 'LEMD', iata: 'MAD', name: 'Adolfo Suárez Madrid–Barajas Airport',              city: 'Madrid',      country: 'Spain',        lat: 40.4936,  lng:  -3.5668 },
+  { icao: 'LIRF', iata: 'FCO', name: 'Leonardo da Vinci International Airport',           city: 'Rome',        country: 'Italy',        lat: 41.8003,  lng:  12.2389 },
+  { icao: 'LSZH', iata: 'ZRH', name: 'Zurich Airport',                                    city: 'Zurich',      country: 'Switzerland',  lat: 47.4647,  lng:   8.5492 },
+  { icao: 'UUEE', iata: 'SVO', name: 'Sheremetyevo International Airport',                city: 'Moscow',      country: 'Russia',       lat: 55.9726,  lng:  37.4146 },
+  // Asia-Pacific
+  { icao: 'VHHH', iata: 'HKG', name: 'Hong Kong International Airport',                  city: 'Hong Kong',   country: 'China',        lat: 22.3080,  lng: 113.9185 },
+  { icao: 'ZBAA', iata: 'PEK', name: 'Beijing Capital International Airport',             city: 'Beijing',     country: 'China',        lat: 40.0801,  lng: 116.5846 },
+  { icao: 'ZSPD', iata: 'PVG', name: 'Shanghai Pudong International Airport',             city: 'Shanghai',    country: 'China',        lat: 31.1443,  lng: 121.8083 },
+  { icao: 'WSSS', iata: 'SIN', name: 'Singapore Changi Airport',                          city: 'Singapore',   country: 'Singapore',    lat:  1.3644,  lng: 103.9915 },
+  { icao: 'RJTT', iata: 'HND', name: 'Tokyo Haneda Airport',                              city: 'Tokyo',       country: 'Japan',        lat: 35.5494,  lng: 139.7798 },
+  { icao: 'RJAA', iata: 'NRT', name: 'Narita International Airport',                      city: 'Tokyo',       country: 'Japan',        lat: 35.7720,  lng: 140.3929 },
+  { icao: 'RKSI', iata: 'ICN', name: 'Incheon International Airport',                     city: 'Seoul',       country: 'South Korea',  lat: 37.4691,  lng: 126.4510 },
+  { icao: 'VTBS', iata: 'BKK', name: 'Suvarnabhumi Airport',                              city: 'Bangkok',     country: 'Thailand',     lat: 13.6811,  lng: 100.7475 },
+  { icao: 'WMKK', iata: 'KUL', name: 'Kuala Lumpur International Airport',                city: 'Kuala Lumpur',country: 'Malaysia',     lat:  2.7456,  lng: 101.7099 },
+  { icao: 'WIII', iata: 'CGK', name: 'Soekarno-Hatta International Airport',              city: 'Jakarta',     country: 'Indonesia',    lat: -6.1256,  lng: 106.6559 },
+  { icao: 'YSSY', iata: 'SYD', name: 'Sydney Kingsford Smith Airport',                    city: 'Sydney',      country: 'Australia',    lat: -33.9461, lng: 151.1772 },
+  { icao: 'YMML', iata: 'MEL', name: 'Melbourne Airport',                                 city: 'Melbourne',   country: 'Australia',    lat: -37.6690, lng: 144.8410 },
+  // Americas
+  { icao: 'KJFK', iata: 'JFK', name: 'John F. Kennedy International Airport',             city: 'New York',    country: 'USA',          lat: 40.6413,  lng: -73.7781 },
+  { icao: 'KLAX', iata: 'LAX', name: 'Los Angeles International Airport',                 city: 'Los Angeles', country: 'USA',          lat: 33.9425,  lng:-118.4081 },
+  { icao: 'KORD', iata: 'ORD', name: "O'Hare International Airport",                      city: 'Chicago',     country: 'USA',          lat: 41.9742,  lng: -87.9073 },
+  { icao: 'KATL', iata: 'ATL', name: 'Hartsfield-Jackson Atlanta International Airport',  city: 'Atlanta',     country: 'USA',          lat: 33.6407,  lng: -84.4277 },
+  { icao: 'KDFW', iata: 'DFW', name: 'Dallas/Fort Worth International Airport',           city: 'Dallas',      country: 'USA',          lat: 32.8998,  lng: -97.0403 },
+  { icao: 'KMIA', iata: 'MIA', name: 'Miami International Airport',                       city: 'Miami',       country: 'USA',          lat: 25.7959,  lng: -80.2870 },
+  { icao: 'CYYZ', iata: 'YYZ', name: 'Toronto Pearson International Airport',             city: 'Toronto',     country: 'Canada',       lat: 43.6777,  lng: -79.6248 },
+  { icao: 'SBGR', iata: 'GRU', name: 'São Paulo/Guarulhos International Airport',         city: 'São Paulo',   country: 'Brazil',       lat: -23.4356, lng: -46.4731 },
+  // Africa
+  { icao: 'FAOR', iata: 'JNB', name: 'O.R. Tambo International Airport',                  city: 'Johannesburg',country: 'South Africa', lat: -26.1392, lng:  28.2460 },
+  { icao: 'HECA', iata: 'CAI', name: 'Cairo International Airport',                       city: 'Cairo',       country: 'Egypt',        lat: 30.1219,  lng:  31.4056 },
+  { icao: 'HAAB', iata: 'ADD', name: 'Addis Ababa Bole International Airport',            city: 'Addis Ababa', country: 'Ethiopia',     lat:  8.9779,  lng:  38.7993 },
+]

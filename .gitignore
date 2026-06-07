@@ -19,3 +19,11 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Node
+node_modules/
+dist/
+frontend/dist/
+
+# Graphify
+graphify-out/
