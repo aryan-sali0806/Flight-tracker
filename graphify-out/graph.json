@@ -1,0 +1,788 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "config.py",
+      "file_type": "code",
+      "source_file": "backend/config.py",
+      "source_location": "L1",
+      "id": "backend_config",
+      "community": 5,
+      "norm_label": "config.py"
+    },
+    {
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "backend/main.py",
+      "source_location": "L1",
+      "id": "backend_main",
+      "community": 4,
+      "norm_label": "main.py"
+    },
+    {
+      "label": "health_check()",
+      "file_type": "code",
+      "source_file": "backend/main.py",
+      "source_location": "L35",
+      "id": "backend_main_health_check",
+      "community": 4,
+      "norm_label": "health_check()"
+    },
+    {
+      "label": "Returns 200 OK when the API is running.",
+      "file_type": "rationale",
+      "source_file": "backend/main.py",
+      "source_location": "L36",
+      "id": "backend_main_rationale_36",
+      "community": 4,
+      "norm_label": "returns 200 ok when the api is running."
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/models/__init__.py",
+      "source_location": "L1",
+      "id": "models_init",
+      "community": 6,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "bbox.py",
+      "file_type": "code",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L1",
+      "id": "models_bbox",
+      "community": 2,
+      "norm_label": "bbox.py"
+    },
+    {
+      "label": "BoundingBox",
+      "file_type": "code",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L5",
+      "id": "models_bbox_boundingbox",
+      "community": 2,
+      "norm_label": "boundingbox"
+    },
+    {
+      "label": ".to_params()",
+      "file_type": "code",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L15",
+      "id": "models_bbox_boundingbox_to_params",
+      "community": 2,
+      "norm_label": ".to_params()"
+    },
+    {
+      "label": "Geographic rectangle used to filter aircraft by region.     frozen=True makes in",
+      "file_type": "rationale",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L6",
+      "id": "models_bbox_rationale_6",
+      "community": 2,
+      "norm_label": "geographic rectangle used to filter aircraft by region.     frozen=true makes in"
+    },
+    {
+      "label": "Returns query parameters the OpenSky API expects.",
+      "file_type": "rationale",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L16",
+      "id": "models_bbox_rationale_16",
+      "community": 2,
+      "norm_label": "returns query parameters the opensky api expects."
+    },
+    {
+      "label": "flight.py",
+      "file_type": "code",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L1",
+      "id": "models_flight",
+      "community": 0,
+      "norm_label": "flight.py"
+    },
+    {
+      "label": "Flight",
+      "file_type": "code",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L4",
+      "id": "models_flight_flight",
+      "community": 1,
+      "norm_label": "flight"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "basemodel",
+      "community": 0,
+      "norm_label": "basemodel"
+    },
+    {
+      "label": "FlightResponse",
+      "file_type": "code",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L30",
+      "id": "models_flight_flightresponse",
+      "community": 0,
+      "norm_label": "flightresponse"
+    },
+    {
+      "label": "ErrorResponse",
+      "file_type": "code",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L37",
+      "id": "models_flight_errorresponse",
+      "community": 0,
+      "norm_label": "errorresponse"
+    },
+    {
+      "label": "Represents a single aircraft's current state vector from OpenSky.",
+      "file_type": "rationale",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L5",
+      "id": "models_flight_rationale_5",
+      "community": 1,
+      "norm_label": "represents a single aircraft's current state vector from opensky."
+    },
+    {
+      "label": "Wrapper returned by GET /flights.",
+      "file_type": "rationale",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L31",
+      "id": "models_flight_rationale_31",
+      "community": 0,
+      "norm_label": "wrapper returned by get /flights."
+    },
+    {
+      "label": "Returned when something goes wrong (e.g. OpenSky is unreachable).",
+      "file_type": "rationale",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L38",
+      "id": "models_flight_rationale_38",
+      "community": 0,
+      "norm_label": "returned when something goes wrong (e.g. opensky is unreachable)."
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/routers/__init__.py",
+      "source_location": "L1",
+      "id": "routers_init",
+      "community": 7,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "flights.py",
+      "file_type": "code",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L1",
+      "id": "routers_flights",
+      "community": 0,
+      "norm_label": "flights.py"
+    },
+    {
+      "label": "get_flights()",
+      "file_type": "code",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L18",
+      "id": "routers_flights_get_flights",
+      "community": 0,
+      "norm_label": "get_flights()"
+    },
+    {
+      "label": "Fetch current state vectors for all aircraft visible over India.      Returns li",
+      "file_type": "rationale",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L19",
+      "id": "routers_flights_rationale_19",
+      "community": 0,
+      "norm_label": "fetch current state vectors for all aircraft visible over india.      returns li"
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/services/__init__.py",
+      "source_location": "L1",
+      "id": "services_init",
+      "community": 8,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "opensky.py",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L1",
+      "id": "services_opensky",
+      "community": 0,
+      "norm_label": "opensky.py"
+    },
+    {
+      "label": "OpenSkyError",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L13",
+      "id": "services_opensky_openskyerror",
+      "community": 3,
+      "norm_label": "openskyerror"
+    },
+    {
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "exception",
+      "community": 3,
+      "norm_label": "exception"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L18",
+      "id": "services_opensky_openskyerror_init",
+      "community": 3,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": "_parse_state_vector()",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "id": "services_opensky_parse_state_vector",
+      "community": 1,
+      "norm_label": "_parse_state_vector()"
+    },
+    {
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "id": "any",
+      "community": 1,
+      "norm_label": "any"
+    },
+    {
+      "label": "Flight",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "id": "flight",
+      "community": 1,
+      "norm_label": "flight"
+    },
+    {
+      "label": "fetch_flights()",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L58",
+      "id": "services_opensky_fetch_flights",
+      "community": 1,
+      "norm_label": "fetch_flights()"
+    },
+    {
+      "label": "BoundingBox",
+      "file_type": "code",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L58",
+      "id": "boundingbox",
+      "community": 1,
+      "norm_label": "boundingbox"
+    },
+    {
+      "label": "Raised when the OpenSky API is unreachable or returns an error.     Carries an H",
+      "file_type": "rationale",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L14",
+      "id": "services_opensky_rationale_14",
+      "community": 3,
+      "norm_label": "raised when the opensky api is unreachable or returns an error.     carries an h"
+    },
+    {
+      "label": "Convert a raw OpenSky state vector into a Flight model.     Returns None if the",
+      "file_type": "rationale",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L37",
+      "id": "services_opensky_rationale_37",
+      "community": 1,
+      "norm_label": "convert a raw opensky state vector into a flight model.     returns none if the"
+    },
+    {
+      "label": "Fetch aircraft state vectors from OpenSky for the given bounding box.     Defaul",
+      "file_type": "rationale",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L59",
+      "id": "services_opensky_rationale_59",
+      "community": 1,
+      "norm_label": "fetch aircraft state vectors from opensky for the given bounding box.     defaul"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/main.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "backend_main",
+      "target": "backend_main_health_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/main.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "backend_main_rationale_36",
+      "target": "backend_main_health_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "models_bbox",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "services_opensky",
+      "target": "models_bbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "source": "any",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "source": "boundingbox",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "source": "flight",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "models_bbox_boundingbox",
+      "target": "models_bbox_boundingbox_to_params",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "models_bbox_rationale_6",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "source": "services_opensky_openskyerror",
+      "target": "models_bbox_boundingbox",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/bbox.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "models_bbox_rationale_16",
+      "target": "models_bbox_boundingbox_to_params",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "models_flight",
+      "target": "models_flight_errorresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "models_flight",
+      "target": "models_flight_flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "models_flight",
+      "target": "models_flight_flightresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "routers_flights",
+      "target": "models_flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "services_opensky",
+      "target": "models_flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "source": "any",
+      "target": "models_flight_flight",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "source": "boundingbox",
+      "target": "models_flight_flight",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "source": "flight",
+      "target": "models_flight_flight",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "models_flight_flight",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "models_flight_rationale_5",
+      "target": "models_flight_flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "source": "services_opensky_openskyerror",
+      "target": "models_flight_flight",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "models_flight_errorresponse",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "models_flight_flightresponse",
+      "target": "basemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "models_flight_rationale_31",
+      "target": "models_flight_flightresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routers_flights_get_flights",
+      "target": "models_flight_flightresponse"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/models/flight.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "models_flight_rationale_38",
+      "target": "models_flight_errorresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "routers_flights",
+      "target": "routers_flights_get_flights",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "routers_flights",
+      "target": "services_opensky",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "routers_flights_get_flights",
+      "target": "services_opensky_fetch_flights"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/routers/flights.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "routers_flights_rationale_19",
+      "target": "routers_flights_get_flights",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "services_opensky",
+      "target": "services_opensky_fetch_flights",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "services_opensky",
+      "target": "services_opensky_openskyerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "services_opensky",
+      "target": "services_opensky_parse_state_vector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "services_opensky_fetch_flights",
+      "target": "services_opensky_openskyerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "services_opensky_openskyerror",
+      "target": "exception",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "services_opensky_openskyerror",
+      "target": "services_opensky_openskyerror_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "services_opensky_rationale_14",
+      "target": "services_opensky_openskyerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "services_opensky_fetch_flights",
+      "target": "services_opensky_parse_state_vector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "services_opensky_parse_state_vector",
+      "target": "any",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "services_opensky_parse_state_vector",
+      "target": "flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "services_opensky_rationale_37",
+      "target": "services_opensky_parse_state_vector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "services_opensky_fetch_flights",
+      "target": "flight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "services_opensky_fetch_flights",
+      "target": "boundingbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/services/opensky.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "services_opensky_rationale_59",
+      "target": "services_opensky_fetch_flights",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "4a6f63102c04c47ce66eb864fd8941cf246fbd62"
+}
