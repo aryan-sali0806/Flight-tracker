@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar'
 import Settings from './components/Settings'
 import Dashboard from './components/Dashboard'
 import RegionSelector from './components/RegionSelector'
+import AircraftCard from './components/AircraftCard'
 import { fetchFlights } from './api/flights'
 import { REGIONS } from './data/regions'
 import type { RegionId } from './data/regions'
@@ -16,6 +17,7 @@ export default function App() {
   const [flights, setFlights] = useState<Flight[]>([])
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
   const [activeRegion, setActiveRegion] = useState<RegionId>('india')
+  const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null)
 
   useEffect(() => {
     const load = () =>
@@ -43,7 +45,7 @@ export default function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <Map mapType={mapType} flyTarget={flyTarget} flights={flights} />
+      <Map mapType={mapType} flyTarget={flyTarget} flights={flights} onFlightClick={setSelectedFlight} />
 
       <div className="top-bar">
         <div className="top-bar-controls">
@@ -54,6 +56,10 @@ export default function App() {
       </div>
 
       <Dashboard count={flights.length} lastUpdated={lastUpdated} />
+
+      {selectedFlight && (
+        <AircraftCard flight={selectedFlight} onClose={() => setSelectedFlight(null)} />
+      )}
     </div>
   )
 }

@@ -10,6 +10,24 @@ export interface Flight {
   altitude: number | null
   velocity: number | null
   heading: number | null
+  on_ground: boolean | null
+  vertical_rate: number | null
+  squawk: string | null
+  origin_country: string | null
+}
+
+export interface AircraftMeta {
+  icao24: string
+  registration: string | null
+  manufacturer: string | null
+  model: string | null
+  typecode: string | null
+  airline_name: string | null
+  airline_icao: string | null
+  airline_iata: string | null
+  owner: string | null
+  built: string | null
+  engines: string | null
 }
 
 export interface FlightResponse {

@@ -44,9 +44,10 @@ interface Props {
   mapType: MapType
   flyTarget: FlyTarget | null
   flights: Flight[]
+  onFlightClick: (flight: Flight) => void
 }
 
-export default function Map({ mapType, flyTarget, flights }: Props) {
+export default function Map({ mapType, flyTarget, flights, onFlightClick }: Props) {
   const layer = TILE_LAYERS[mapType]
   const placedFlights = flights.filter(hasCoordinates)
 
@@ -65,7 +66,7 @@ export default function Map({ mapType, flyTarget, flights }: Props) {
       />
       <MapController flyTarget={flyTarget} />
       {placedFlights.map(flight => (
-        <FlightMarker key={flight.icao24} flight={flight} />
+        <FlightMarker key={flight.icao24} flight={flight} onFlightClick={onFlightClick} />
       ))}
     </MapContainer>
   )

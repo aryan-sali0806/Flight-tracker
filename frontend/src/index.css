@@ -363,6 +363,284 @@
   letter-spacing: 0.05em;
 }
 
+/* ─── Aircraft Card ─────────────────────────────────────── */
+
+@keyframes cardPop {
+  from {
+    transform: translateX(calc(100% + 24px));
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.aircraft-card {
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  width: 318px;
+  background: #161a26;
+  border: 1px solid #2a2f42;
+  border-radius: 12px;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(96, 165, 250, 0.07);
+  z-index: 1000;
+  overflow: hidden;
+  animation: cardPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Gradient rainbow accent bar across the top */
+.aircraft-card::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 50%, #a78bfa 100%);
+}
+
+.ac-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px 13px;
+  background: linear-gradient(175deg, #1c2140 0%, #161a26 100%);
+  border-bottom: 1px solid #1e2235;
+}
+
+.ac-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ac-callsign {
+  font-size: 22px;
+  font-weight: 800;
+  color: #60a5fa;
+  letter-spacing: 0.07em;
+  line-height: 1;
+}
+
+.ac-airline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ac-airline {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.ac-close {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #2a2f42;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.ac-close:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+/* Status pill badge */
+.ac-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ac-status-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ac-status-airborne {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+.ac-status-airborne::before {
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.ac-status-ground {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}
+
+.ac-status-ground::before {
+  background: #f59e0b;
+}
+
+/* Model + registration bar */
+.ac-identity {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  border-bottom: 1px solid #1e2235;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ac-reg {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Section labels with full-width trailing rule */
+.ac-section-label {
+  padding: 11px 16px 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ac-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #1e2235;
+}
+
+.ac-section-live     { color: #06b6d4; }
+.ac-section-aircraft { color: #a78bfa; }
+
+.ac-rows {
+  padding: 2px 16px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ac-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(30, 34, 53, 0.9);
+}
+
+.ac-row:last-child {
+  border-bottom: none;
+}
+
+.ac-label {
+  font-size: 11px;
+  color: #4b5563;
+  flex-shrink: 0;
+}
+
+.ac-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Coloured vertical rate */
+.ac-vrate-up   { color: #22c55e; }
+.ac-vrate-down { color: #f87171; }
+
+/* Loading spinner */
+.ac-loading {
+  padding: 8px 16px 12px;
+  font-size: 12px;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ac-loading::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border: 2px solid #2a2f42;
+  border-top-color: #a78bfa;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+.ac-error {
+  margin: 0 16px 12px;
+  padding: 7px 10px;
+  font-size: 11px;
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.07);
+  border: 1px solid rgba(248, 113, 113, 0.18);
+  border-radius: 6px;
+}
+
+.ac-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-top: 1px solid #1e2235;
+  background: #0d1017;
+}
+
+.ac-icao {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3b82f6;
+  letter-spacing: 0.09em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ac-country {
+  font-size: 10px;
+  color: #374151;
+}
+
 /* ─── Dashboard ─────────────────────────────────────────── */
 
 .dashboard {

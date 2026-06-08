@@ -1,4 +1,4 @@
-import { Marker, Popup } from 'react-leaflet'
+import { Marker } from 'react-leaflet'
 import L from 'leaflet'
 import type { Flight } from '../types'
 
@@ -36,52 +36,20 @@ function createPlaneIcon(heading: number | null): L.DivIcon {
   })
 }
 
-function formatAltitude(metres: number | null): string {
-  if (metres === null) return '—'
-  return `${Math.round(metres * 3.281).toLocaleString()} ft`
-}
-
-function formatSpeed(mps: number | null): string {
-  if (mps === null) return '—'
-  return `${Math.round(mps * 1.944)} kts`
-}
-
-function formatHeading(deg: number | null): string {
-  if (deg === null) return '—'
-  return `${Math.round(deg)}°`
-}
 
 interface Props {
   flight: Flight & { latitude: number; longitude: number }
+  onFlightClick: (flight: Flight) => void
 }
 
-export default function FlightMarker({ flight }: Props) {
+export default function FlightMarker({ flight, onFlightClick }: Props) {
   const icon = createPlaneIcon(flight.heading)
 
   return (
-    <Marker position={[flight.latitude, flight.longitude]} icon={icon}>
-      <Popup>
-        <div className="flight-popup">
-          <div className="popup-callsign">
-            {flight.callsign?.trim() || 'Unknown'}
-          </div>
-          <div className="popup-rows">
-            <div className="popup-row">
-              <span className="popup-label">Altitude</span>
-              <span className="popup-value">{formatAltitude(flight.altitude)}</span>
-            </div>
-            <div className="popup-row">
-              <span className="popup-label">Speed</span>
-              <span className="popup-value">{formatSpeed(flight.velocity)}</span>
-            </div>
-            <div className="popup-row">
-              <span className="popup-label">Heading</span>
-              <span className="popup-value">{formatHeading(flight.heading)}</span>
-            </div>
-          </div>
-          <div className="popup-icao">{flight.icao24.toUpperCase()}</div>
-        </div>
-      </Popup>
-    </Marker>
+    <Marker
+      position={[flight.latitude, flight.longitude]}
+      icon={icon}
+      eventHandlers={{ click: () => onFlightClick(flight) }}
+    />
   )
 }
