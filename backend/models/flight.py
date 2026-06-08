@@ -25,6 +25,34 @@ class Flight(BaseModel):
     heading: float | None = Field(
         None, description="True track in degrees (0=North, 90=East)."
     )
+    on_ground: bool | None = Field(
+        None, description="True if the aircraft is on the ground (taxiing), False if airborne."
+    )
+    vertical_rate: float | None = Field(
+        None, description="Climb/descent rate in m/s. Positive = climbing, negative = descending."
+    )
+    squawk: str | None = Field(
+        None, description="4-digit transponder squawk code."
+    )
+    origin_country: str | None = Field(
+        None, description="Country of registration, inferred from the ICAO24 address prefix."
+    )
+
+
+class AircraftMeta(BaseModel):
+    """Static metadata for an aircraft from the OpenSky Aircraft Database."""
+
+    icao24: str = Field(..., description="ICAO 24-bit address used to look up this record")
+    registration: str | None = Field(None, description="Tail number, e.g. 'VT-ANB'")
+    manufacturer: str | None = Field(None, description="Airframe manufacturer, e.g. 'Boeing'")
+    model: str | None = Field(None, description="Aircraft model, e.g. '737-800'")
+    typecode: str | None = Field(None, description="ICAO type designator, e.g. 'B738'")
+    airline_name: str | None = Field(None, description="Operating airline, e.g. 'Air India'")
+    airline_icao: str | None = Field(None, description="3-letter ICAO airline code, e.g. 'AIC'")
+    airline_iata: str | None = Field(None, description="2-letter IATA airline code, e.g. 'AI'")
+    owner: str | None = Field(None, description="Legal owner — may differ from operator for leased aircraft")
+    built: str | None = Field(None, description="Delivery/build date, e.g. '2019-04-12'")
+    engines: str | None = Field(None, description="Engine type, e.g. 'CFM56-7B27'")
 
 
 class FlightResponse(BaseModel):

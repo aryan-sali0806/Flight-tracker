@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import APP_TITLE, APP_DESCRIPTION, APP_VERSION
-from routers import flights
+from routers import flights, aircraft
 
 # Configure once here — all loggers in every module inherit this automatically
 logging.basicConfig(
@@ -29,6 +29,7 @@ app.add_middleware(
 )
 
 app.include_router(flights.router, prefix="/flights", tags=["Flights"])
+app.include_router(aircraft.router, prefix="/aircraft", tags=["Aircraft"])
 
 
 @app.get("/health", tags=["Health"])

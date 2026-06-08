@@ -24,13 +24,17 @@ class OpenSkyError(Exception):
 # OpenSky returns each aircraft as a plain list, not a dict.
 # These are the index positions of the fields we care about.
 # Full reference: https://openskynetwork.github.io/opensky-api/rest.html
-_ICAO24_IDX    = 0
-_CALLSIGN_IDX  = 1
-_LONGITUDE_IDX = 5
-_LATITUDE_IDX  = 6
-_ALTITUDE_IDX  = 7   # baro_altitude in metres
-_VELOCITY_IDX  = 9   # ground speed in m/s
-_HEADING_IDX   = 10  # true track in degrees
+_ICAO24_IDX         = 0
+_CALLSIGN_IDX       = 1
+_ORIGIN_COUNTRY_IDX = 2   # country of registration
+_LONGITUDE_IDX      = 5
+_LATITUDE_IDX       = 6
+_ALTITUDE_IDX       = 7   # baro_altitude in metres
+_ON_GROUND_IDX      = 8   # boolean
+_VELOCITY_IDX       = 9   # ground speed in m/s
+_HEADING_IDX        = 10  # true track in degrees
+_VERTICAL_RATE_IDX  = 11  # climb/descent rate in m/s
+_SQUAWK_IDX         = 14  # 4-digit transponder code
 
 
 def _parse_state_vector(state: list[Any]) -> Flight | None:
@@ -52,6 +56,10 @@ def _parse_state_vector(state: list[Any]) -> Flight | None:
         altitude=state[_ALTITUDE_IDX],
         velocity=state[_VELOCITY_IDX],
         heading=state[_HEADING_IDX],
+        on_ground=state[_ON_GROUND_IDX],
+        vertical_rate=state[_VERTICAL_RATE_IDX],
+        squawk=state[_SQUAWK_IDX] or None,
+        origin_country=state[_ORIGIN_COUNTRY_IDX] or None,
     )
 
 
