@@ -17,6 +17,7 @@ app = FastAPI(
     title=APP_TITLE,
     description=APP_DESCRIPTION,
     version=APP_VERSION,
+    redirect_slashes=False,
 )
 
 # CORS allows the browser-based frontend (on a different port) to call this API.

@@ -3,7 +3,12 @@ from typing import Any
 
 import httpx
 
-from config import OPENSKY_STATES_ENDPOINT, OPENSKY_TIMEOUT_SECONDS
+from config import (
+    OPENSKY_STATES_ENDPOINT,
+    OPENSKY_TIMEOUT_SECONDS,
+    OPENSKY_USERNAME,
+    OPENSKY_PASSWORD,
+)
 from models.bbox import BoundingBox, INDIA_BOUNDING_BOX
 from models.flight import Flight
 
@@ -63,23 +68,32 @@ def _parse_state_vector(state: list[Any]) -> Flight | None:
     )
 
 
-async def fetch_flights(bbox: BoundingBox = INDIA_BOUNDING_BOX) -> list[Flight]:
+async def fetch_flights(bbox: BoundingBox | None = INDIA_BOUNDING_BOX) -> list[Flight]:
     """
     Fetch aircraft state vectors from OpenSky for the given bounding box.
-    Defaults to Indian airspace if no region is specified.
+    Pass None to fetch all flights globally (no geographic filter).
 
     Raises:
         OpenSkyError: for any failure communicating with the OpenSky API.
     """
-    logger.info("Fetching flights for bbox: %s", bbox)
+    auth = (OPENSKY_USERNAME, OPENSKY_PASSWORD) if OPENSKY_USERNAME and OPENSKY_PASSWORD else None
+    logger.info("Fetching flights for bbox: %s (auth=%s)", bbox, auth is not None)
 
     try:
         async with httpx.AsyncClient(timeout=OPENSKY_TIMEOUT_SECONDS) as client:
             response = await client.get(
                 OPENSKY_STATES_ENDPOINT,
-                params=bbox.to_params(),
+                params=bbox.to_params() if bbox is not None else {},
+                auth=auth,
             )
-            response.raise_for_status()
+        if response.status_code == 429:
+            retry_after = response.headers.get("Retry-After", "unknown")
+            logger.warning("OpenSky rate limit hit (Retry-After: %s)", retry_after)
+            raise OpenSkyError(
+                detail="OpenSky rate limit reached. Wait a moment and it will recover.",
+                status_code=429,
+            )
+        response.raise_for_status()
 
     except httpx.TimeoutException:
         logger.error("OpenSky request timed out after %ds", OPENSKY_TIMEOUT_SECONDS)

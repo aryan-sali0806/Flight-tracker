@@ -29,7 +29,7 @@ export default function App() {
         .catch(err => console.error('Could not fetch flights:', err))
 
     load()
-    const intervalId = setInterval(load, 10_000)
+    const intervalId = setInterval(load, 15_000)
     return () => clearInterval(intervalId)
   }, [activeRegion])
 
