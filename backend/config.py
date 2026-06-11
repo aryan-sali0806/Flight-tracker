@@ -15,6 +15,11 @@ OPENSKY_AIRCRAFT_ENDPOINT = f"{OPENSKY_API_URL}/metadata/aircraft/icao"
 # How long (seconds) to wait for OpenSky to respond before giving up
 OPENSKY_TIMEOUT_SECONDS = 10
 
+# How long (seconds) to serve cached flight data before hitting OpenSky again.
+# OpenSky updates state vectors every ~10s; caching for the same duration means
+# at most one outbound request per region per interval regardless of client count.
+FLIGHTS_CACHE_TTL_SECONDS = 10
+
 # Optional credentials for authenticated OpenSky access.
 # The aircraft metadata endpoint requires these. Create a free account at
 # https://opensky-network.org and set these env vars before starting the server.

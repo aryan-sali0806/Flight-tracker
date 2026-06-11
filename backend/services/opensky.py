@@ -1,4 +1,5 @@
 import logging
+import time
 from typing import Any
 
 import httpx
@@ -8,11 +9,18 @@ from config import (
     OPENSKY_TIMEOUT_SECONDS,
     OPENSKY_USERNAME,
     OPENSKY_PASSWORD,
+    FLIGHTS_CACHE_TTL_SECONDS,
 )
 from models.bbox import BoundingBox, INDIA_BOUNDING_BOX
 from models.flight import Flight
 
 logger = logging.getLogger(__name__)
+
+# TTL cache for flight state vectors.
+# Key: BoundingBox (or None for global). Value: (monotonic timestamp, parsed flights).
+# Shared across all requests — if two clients ask for India at the same moment,
+# only the first triggers an OpenSky request; the second gets the cached result.
+_flight_cache: dict[BoundingBox | None, tuple[float, list[Flight]]] = {}
 
 
 class OpenSkyError(Exception):
@@ -76,6 +84,14 @@ async def fetch_flights(bbox: BoundingBox | None = INDIA_BOUNDING_BOX) -> list[F
     Raises:
         OpenSkyError: for any failure communicating with the OpenSky API.
     """
+    cached = _flight_cache.get(bbox)
+    if cached is not None:
+        ts, cached_flights = cached
+        age = time.monotonic() - ts
+        if age < FLIGHTS_CACHE_TTL_SECONDS:
+            logger.debug("Flight cache hit for %s (age=%.1fs, %d aircraft)", bbox, age, len(cached_flights))
+            return cached_flights
+
     auth = (OPENSKY_USERNAME, OPENSKY_PASSWORD) if OPENSKY_USERNAME and OPENSKY_PASSWORD else None
     logger.info("Fetching flights for bbox: %s (auth=%s)", bbox, auth is not None)
 
@@ -125,5 +141,6 @@ async def fetch_flights(bbox: BoundingBox | None = INDIA_BOUNDING_BOX) -> list[F
         if (parsed := _parse_state_vector(state)) is not None
     ]
 
-    logger.info("Returned %d aircraft", len(flights))
+    _flight_cache[bbox] = (time.monotonic(), flights)
+    logger.info("Fetched and cached %d aircraft for %s", len(flights), bbox)
     return flights
