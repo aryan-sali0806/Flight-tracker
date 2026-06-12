@@ -2,15 +2,14 @@
 
 A real-time aircraft tracking app powered by the [OpenSky Network](https://opensky-network.org). Watch live flights over India, Europe, North America, or the whole globe on an interactive map.
 
-![Flight Tracker screenshot](frontend/src/assets/hero.png)
-
 ## Features
 
 - Live aircraft positions refreshed every 10 seconds
 - Interactive map with four tile styles: Dark, Light, Voyager, Satellite
 - Click any aircraft to see a details card — callsign, altitude, speed, heading, vertical rate, and static metadata (manufacturer, model, registration, airline)
-- Region selector to switch between India, Europe, North America, and Global views
+- Region selector: India, Europe, North America, Global
 - Airport search — jump to any major airport instantly
+- Server-side caching to minimize OpenSky API calls regardless of client count
 
 ## Tech Stack
 
@@ -27,7 +26,7 @@ A real-time aircraft tracking app powered by the [OpenSky Network](https://opens
 flight-tracker/
 ├── backend/
 │   ├── main.py               # FastAPI app, CORS, logging
-│   ├── config.py             # API URLs, credentials, app metadata
+│   ├── config.py             # API URLs, credentials, cache TTL
 │   ├── models/
 │   │   ├── flight.py         # Flight, AircraftMeta, FlightResponse (Pydantic)
 │   │   └── bbox.py           # BoundingBox dataclass + region constants
@@ -35,8 +34,8 @@ flight-tracker/
 │   │   ├── flights.py        # GET /flights
 │   │   └── aircraft.py       # GET /aircraft/{icao24}
 │   └── services/
-│       ├── opensky.py        # OpenSky state vector fetcher
-│       └── aircraft_db.py    # Aircraft metadata fetcher (with in-memory cache)
+│       ├── opensky.py        # OpenSky fetcher with TTL cache
+│       └── aircraft_db.py    # Aircraft metadata fetcher with permanent cache
 └── frontend/
     └── src/
         ├── App.tsx
@@ -55,6 +54,27 @@ flight-tracker/
         └── types/index.ts
 ```
 
+## Caching
+
+The backend has two independent in-memory caches that eliminate redundant OpenSky requests.
+
+### Flight state vector cache (TTL)
+
+`services/opensky.py` keeps a per-region TTL cache keyed by bounding box. When multiple clients request the same region simultaneously, only the first request hits OpenSky — every subsequent one within the TTL window gets the cached result.
+
+| Setting | Value | Location |
+|---|---|---|
+| TTL | 10 seconds | `config.py → FLIGHTS_CACHE_TTL_SECONDS` |
+| Scope | Per region (India / Europe / North America / Global) | `_flight_cache` dict |
+
+The 10-second TTL matches OpenSky's own state-vector update interval, so no live data is lost.
+
+### Aircraft metadata cache (permanent)
+
+`services/aircraft_db.py` caches aircraft registration, manufacturer, model, and airline data permanently for the lifetime of the server process. Aircraft metadata is static — an aircraft's ICAO24 address, registration, and type never change — so there is no reason to re-fetch it.
+
+The first request for a given ICAO24 address hits the OpenSky Aircraft Database; every subsequent request for the same aircraft is served instantly from memory.
+
 ## Getting Started
 
 ### Prerequisites
@@ -71,7 +91,7 @@ cd backend
 uvicorn main:app --reload --port 8000
 ```
 
-The API will be available at `http://localhost:8000`. Visit `http://localhost:8000/docs` for the interactive Swagger UI.
+The API is available at `http://localhost:8000`. Visit `http://localhost:8000/docs` for the Swagger UI.
 
 ### 2. Frontend
 
@@ -89,20 +109,26 @@ The `/flights` endpoint works without an account. The aircraft metadata endpoint
 
 Create an account at [opensky-network.org](https://opensky-network.org), then set these environment variables before starting the backend:
 
-```bash
+```powershell
 # Windows PowerShell
 $env:OPENSKY_USERNAME = "your_username"
 $env:OPENSKY_PASSWORD = "your_password"
 ```
 
-## API Endpoints
+```bash
+# Linux / macOS
+export OPENSKY_USERNAME=your_username
+export OPENSKY_PASSWORD=your_password
+```
+
+## API Reference
 
 | Method | Path | Description |
 |---|---|---|
 | GET | `/health` | Health check |
-| GET | `/flights?region=india` | Live aircraft for a region |
+| GET | `/flights?region=india` | Live aircraft state vectors for a region |
 | GET | `/aircraft/{icao24}` | Static metadata for one aircraft |
-| GET | `/docs` | Swagger UI |
+| GET | `/docs` | Interactive Swagger UI |
 
 Supported `region` values: `india`, `europe`, `north_america`, `global`.
 
